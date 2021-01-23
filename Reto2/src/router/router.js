@@ -10,9 +10,9 @@ router.get('/', async (req, res, next) => {
   try {
     const gender = req.query.genero ? req.query.genero : null
     const status = req.query.estado ? req.query.estado : null
-    const city = req.query.ciudad ? req.query.cuidad : null
+    const city = req.query.ciudad ? req.query.ciudad : null
     if (!gender && !status && !city) {
-      const infected = await infectedModel.findAll()
+      const infected = await infectedModel.findAll({ attributes: ['id_de_caso'] })
       return res.send({
         data: infected
       })
@@ -27,7 +27,8 @@ router.get('/', async (req, res, next) => {
           { estado: status },
           { sexo: gender }
         ]
-      }
+			},
+			attributes: ['id_de_caso']
     })
     return res.send({
       data: infected
