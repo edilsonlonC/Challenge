@@ -5,11 +5,11 @@ const port = process.env.PORT || 4000
 const sequelize = require('./database/setup')()
 const { request } = require('./services/request')
 const router = require('./router/router')
-
+const serverError = require('./handler/serverError')
 request() // insert elements into DB
 
 app.use('/api', router)
-
+app.use('*', serverError)
 if (!module.parent) {
   app.listen(port, async (err) => {
     if (err) console.error(err)

@@ -54,7 +54,7 @@ methods:{
 						this.$store.dispatch('requestInfo')
 						this.thread()
 						console.log('request')
-								},3000)
+								},600000)
 					},
 					remove(id){
 					this.$store.dispatch('removeCase', id)
